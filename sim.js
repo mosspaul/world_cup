@@ -4,10 +4,9 @@ function rando(arg) {
 
 function playMatch(team1, team2) {
     if (team1.teamRating + rando(25) === team2.teamRating + rando(25)) {
-        return team1.teamRating < team2.teamRating ? team1 : team2;
+        return team1.teamRating < team2.teamRating ? [team1, team2]: [team2, team1];
     } 
-    return (team1.teamRating + rando(25) < team2.teamRating + rando(25)) ? team1 : team2;
-   
+    return (team1.teamRating + rando(25) < team2.teamRating + rando(25)) ? [team1, team2]: [team2, team1];
 }
 
 function findFamiliar(array) {
@@ -57,12 +56,12 @@ function Group(team1, team2, team3, team4) {
     this.team4 = team4;
     this.simMatches = () => 
         [
-            playMatch(team1, team2),
-            playMatch(team1, team3),
-            playMatch(team1, team4),
-            playMatch(team2, team3),
-            playMatch(team2, team4),
-            playMatch(team3, team4)
+            playMatch(team1, team2)[0],
+            playMatch(team1, team3)[0],
+            playMatch(team1, team4)[0],
+            playMatch(team2, team3)[0],
+            playMatch(team2, team4)[0],
+            playMatch(team3, team4)[0]
         ];  
 }
 /*
@@ -132,7 +131,6 @@ let f = simGroup(GroupE.simMatches());
 let e = simGroup(GroupF.simMatches());
 let g = simGroup(GroupG.simMatches());
 let h = simGroup(GroupH.simMatches());
-
 console.log("Group Stage");
 for (let item of [a, b, c, d, e, f, g, h]) {
     console.table(item);
@@ -141,6 +139,11 @@ for (let item of [a, b, c, d, e, f, g, h]) {
 /* 
 *KNOCKOUT STAGES
 */
+function Record(winner, loser) {
+    this.winner = winner;
+    this.loser = loser;
+}
+
 console.log("\n\n\nRound of 16");
 let match49 = playMatch(a[0], b[1]);
 let match50 = playMatch(c[0], d[1]);
@@ -151,29 +154,29 @@ let match52 = playMatch(d[0], c[1]);
 let match55 = playMatch(f[0], e[1]);
 let match56 = playMatch(h[0], g[1]);
 for (item of [match49, match50, match53, match54, match51, match52, match55, match56]) {
-    console.table([item]);
+    console.table(new Record(item[0], item[1]));
 }
 
 console.log("\n\n\nQuarter-finals");
-let match57 = playMatch(match49, match50);
-let match58 = playMatch(match53, match54);
-let match59 = playMatch(match51, match52);
-let match60 = playMatch(match55, match56);
+let match57 = playMatch(match49[0], match50[0]);
+let match58 = playMatch(match53[0], match54[0]);
+let match59 = playMatch(match51[0], match52[0]);
+let match60 = playMatch(match55[0], match56[0]);
 for (item of [match57, match58, match59, match60]) {
-    console.table([item]);
+    console.table(new Record(item[0], item[1]));
 }
 
 console.log("\n\n\nSemi-finals");
-let match61 = playMatch(match57, match58);
-let match62 = playMatch(match59, match60);
+let match61 = playMatch(match57[0], match58[0]);
+let match62 = playMatch(match59[0], match60[0]);
 for (item of ([match61, match62])) {
-    console.table([item]);
+    console.table(new Record(item[0], item[1]));
 }
 
 console.log("\n\n\nThird place play-off");
-let loser61 = match61 === match57 ? match58 : match57;
-let loser62 = match62 === match59 ? match60 : match59;
-console.table([playMatch(loser61, loser62)]);
+let thirdPlace = playMatch(match61[1], match62[1]);
+console.table(new Record(thirdPlace[0], thirdPlace[1]));
 
 console.log("\n\n\nFinal");
-console.table([playMatch(match61, match62)]);
+let final = playMatch(match61[0], match62[0]);
+console.table(new Record(final[0], final[1]));
