@@ -44,9 +44,10 @@ function simGroup(array) {
     return [result[winners[0]][0], result[winners[1]][0]];
 }
 
-function Team(teamName, teamRating) {
+function Team(teamName, teamRating, flag) {
     this.teamName = teamName;
     this.teamRating = teamRating;
+    this.flag = flag;
 }
 
 function Group(team1, team2, team3, team4) {
@@ -68,59 +69,59 @@ function Group(team1, team2, team3, team4) {
 * GROUP INITIALIZER
 */
 let GroupA = new Group(
-    new Team("Quatar", 50),
-    new Team("Senegal", 18),
-    new Team("Ecuador", 44),
-    new Team("Netherlands", 8)
+    new Team("Qatar", 50, "🇶🇦"),
+    new Team("Senegal", 18, "🇸🇳"),
+    new Team("Ecuador", 44, "🇪🇨"),
+    new Team("Netherlands", 8, "🇳🇱")
 );
 
 let GroupB = new Group(
-    new Team("United States", 16),
-    new Team("Iran", 20),
-    new Team("Wales", 19),
-    new Team("England", 5),
+    new Team("United States", 16, "🇺🇸"),
+    new Team("Iran", 20, "🇮🇷"),
+    new Team("Wales", 19, "🏴󠁧󠁢󠁷󠁬󠁳󠁿"),
+    new Team("England", 5, "🏴󠁧󠁢󠁥󠁮󠁧󠁿"),
 );
 
 let GroupC = new Group(
-    new Team("Saudi Arabia", 51),
-    new Team("Poland", 26),
-    new Team("Argentina", 3),
-    new Team("Mexico", 13),
+    new Team("Saudi Arabia", 51, "🇸🇦"),
+    new Team("Poland", 26, "🇵🇱"),
+    new Team("Argentina", 3, "🇦🇷"),
+    new Team("Mexico", 13, "🇲🇽"),
 );
 
 let GroupD = new Group(
-    new Team("France", 4),
-    new Team("Denmark", 10),
-    new Team("Austrailia", 38),
-    new Team("Tunisia", 30),
+    new Team("France", 4, "🇫🇷"),
+    new Team("Denmark", 10, "🇩🇰"),
+    new Team("Austrailia", 38, "🇦🇺"),
+    new Team("Tunisia", 30, "🇹🇳"),
 );
 
 let GroupE = new Group(
-    new Team("Germany", 11),
-    new Team("Spain", 7),
-    new Team("Costa Rica", 31),
-    new Team("Japan", 24),
+    new Team("Germany", 11, "🇩🇪"),
+    new Team("Spain", 7, "🇪🇸"),
+    new Team("Costa Rica", 31, "🇨🇷"),
+    new Team("Japan", 24, "🇯🇵"),
 );
 
 let GroupF = new Group(
-    new Team("Croatia", 12),
-    new Team("Morocco", 22),
-    new Team("Belgium", 2),
-    new Team("Canada", 41),
+    new Team("Croatia", 12, "🇭🇷"),
+    new Team("Morocco", 22, "🇲🇦"),
+    new Team("Belgium", 2, "🇧🇪"),
+    new Team("Canada", 41, "🇨🇦"),
 );
 
 let GroupG = new Group(
-    new Team("Switzerland", 15),
-    new Team("Serbia", 21),
-    new Team("Brazil", 1),
-    new Team("Cameroon", 43),
+    new Team("Switzerland", 15, "🇨🇭"),
+    new Team("Serbia", 21, "🇷🇸"),
+    new Team("Brazil", 1, "🇧🇷"),
+    new Team("Cameroon", 43, "🇨🇲")
 );
 
 let GroupH = new Group(
-    new Team("Portugal", 9),
-    new Team("Ghana", 61),
-    new Team("South Korea", 28),
-    new Team("Uruguay", 14),
+    new Team("Portugal", 9, "🇵🇹"),
+    new Team("Ghana", 61, "🇬🇭"),
+    new Team("South Korea", 28, "🇰🇷"),
+    new Team("Uruguay", 14, "🇺🇾"),
 );
 
 let a = simGroup(GroupA.simMatches());
@@ -131,7 +132,7 @@ let f = simGroup(GroupE.simMatches());
 let e = simGroup(GroupF.simMatches());
 let g = simGroup(GroupG.simMatches());
 let h = simGroup(GroupH.simMatches());
-console.log("Group Stage");
+console.log("\n\n\nGroup Stage");
 for (let item of [a, b, c, d, e, f, g, h]) {
     console.table(item);
 }
